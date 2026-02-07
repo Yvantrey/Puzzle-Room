@@ -7,6 +7,7 @@ public class PuzzleManager : MonoBehaviour
     public GameObject[] PuzzlePieceHolder3;
     public GameObject[] PuzzlePieceHolder4;
     public GameObject[] PuzzlePieceHolder5;
+    public GameObject wonPanel;
     
     private int greenCounter;
     private int cubeCounter;
@@ -138,6 +139,9 @@ public class PuzzleManager : MonoBehaviour
             PuzzlePieceHolder5[2].activeSelf)
         {
             allPuzzlesCompleted = true;
+            FindObjectOfType<TimerCountdown>().StopTimer();
+            if (wonPanel != null)
+                wonPanel.SetActive(true);
             if (pressurePlate != null)
             {
                 pressurePlate.HideDoor();
