@@ -4,6 +4,7 @@ public class PressurePlate : MonoBehaviour
 {
     public GameObject door;
     private PuzzleManager puzzleManager;
+    private bool allPuzzlesCompleted = false;
 
     private void Start()
     {
@@ -24,12 +25,15 @@ public class PressurePlate : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            door.SetActive(true); // door closes
+            // Only close the door if puzzles are not completed
+            if (!allPuzzlesCompleted)
+                door.SetActive(true);
         }
     }
 
     public void HideDoor()
     {
+        allPuzzlesCompleted = true;
         if (door != null)
             door.SetActive(false);
     }
