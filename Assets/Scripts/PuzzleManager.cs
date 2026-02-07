@@ -11,7 +11,15 @@ public class PuzzleManager : MonoBehaviour
     private int greenCounter;
     private int cubeCounter;
     private int puzzle3Counter;
+    private int puzzle4Counter;
+    private int pressureplateCounter;
+    private bool allPuzzlesCompleted = false;
+    private PressurePlate pressurePlate;
 
+    private void Start()
+    {
+        pressurePlate = FindObjectOfType<PressurePlate>();
+    }
 
     public void GreenATM()
     {
@@ -31,6 +39,7 @@ public class PuzzleManager : MonoBehaviour
                 greenCounter = 0;
                 break;
         }
+        CheckCompletion();
     }
 
     public void Cube()
@@ -51,6 +60,7 @@ public class PuzzleManager : MonoBehaviour
                 cubeCounter = 0;
                 break;
         }
+        CheckCompletion();
     }
 
     public void Puzzle3()
@@ -70,6 +80,69 @@ public class PuzzleManager : MonoBehaviour
                 PuzzlePieceHolder3[2].SetActive(true);
                 puzzle3Counter = 0;
                 break;
+        }
+        CheckCompletion();
+    }
+
+    public void Puzzle4()
+    {
+        puzzle4Counter++;
+
+        switch (puzzle4Counter)
+        {
+            case 0:
+                PuzzlePieceHolder4[0].SetActive(true);
+                PuzzlePieceHolder4[1].SetActive(false);
+                PuzzlePieceHolder4[2].SetActive(false);
+                break;
+            case 1:
+                PuzzlePieceHolder4[0].SetActive(false);
+                PuzzlePieceHolder4[1].SetActive(false);
+                PuzzlePieceHolder4[2].SetActive(true);
+                puzzle4Counter = 0;
+                break;
+        }
+        CheckCompletion();
+    }
+        public void PressurePlate()
+    {
+        pressureplateCounter++;
+
+        switch (pressureplateCounter)
+        {
+            case 0:
+                PuzzlePieceHolder5[0].SetActive(true);
+                PuzzlePieceHolder5[1].SetActive(false);
+                PuzzlePieceHolder5[2].SetActive(false);
+                break;
+            case 1:
+                PuzzlePieceHolder5[0].SetActive(false);
+                PuzzlePieceHolder5[1].SetActive(false);
+                PuzzlePieceHolder5[2].SetActive(true);
+                pressureplateCounter = 0;
+                break;
+        }
+        CheckCompletion();
+    }
+
+    private void CheckCompletion()
+    {
+        if (allPuzzlesCompleted)
+            return;
+
+        // Check if all final puzzle pieces are active
+        if (PuzzlePieceHolder1[2].activeSelf &&
+            PuzzlePieceHolder2[2].activeSelf &&
+            PuzzlePieceHolder3[2].activeSelf &&
+            PuzzlePieceHolder4[2].activeSelf &&
+            PuzzlePieceHolder5[2].activeSelf)
+        {
+            allPuzzlesCompleted = true;
+            if (pressurePlate != null)
+            {
+                pressurePlate.HideDoor();
+                Debug.Log("All puzzles completed! Exit door disappeared!");
+            }
         }
     }
 }
