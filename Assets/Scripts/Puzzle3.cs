@@ -4,6 +4,7 @@ public class Puzzle3 : MonoBehaviour
 {
     private PuzzleManager puzzleManager;
     myControls inputActions;
+    private bool isCorrectAnswer = false;
 
     public UnityEngine.Events.UnityEvent myAction;
     private void Start()
@@ -22,7 +23,11 @@ public class Puzzle3 : MonoBehaviour
         {
             if (inputActions.Player.ActionKey.WasPressedThisFrame())
             {
-                puzzleManager.Puzzle3();
+                if (!isCorrectAnswer)
+                {
+                    puzzleManager.CompletePuzzle3();
+                    isCorrectAnswer = true;
+                }
                 myAction.Invoke();
             }
         }

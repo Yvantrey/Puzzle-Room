@@ -17,6 +17,10 @@ public class PuzzleManager : MonoBehaviour
     private bool allPuzzlesCompleted = false;
     private PressurePlate pressurePlate;
 
+    private bool puzzle1Completed = false;
+    private bool puzzle3Completed = false;
+    private bool puzzle4Completed = false;
+
     private void Start()
     {
         pressurePlate = FindObjectOfType<PressurePlate>();
@@ -83,6 +87,18 @@ public class PuzzleManager : MonoBehaviour
                 break;
         }
         CheckCompletion();
+    }
+
+    public void CompletePuzzle3()
+    {
+        if (!puzzle3Completed)
+        {
+            puzzle3Completed = true;
+            PuzzlePieceHolder3[0].SetActive(false);
+            PuzzlePieceHolder3[1].SetActive(false);
+            PuzzlePieceHolder3[2].SetActive(true);
+            CheckCompletion();
+        }
     }
 
     public void Puzzle4()
