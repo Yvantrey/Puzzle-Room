@@ -101,6 +101,17 @@ public class PuzzleManager : MonoBehaviour
         }
     }
 
+    public void UndoPuzzle3()
+    {
+        if (puzzle3Completed)
+        {
+            puzzle3Completed = false;
+            PuzzlePieceHolder3[0].SetActive(true);
+            PuzzlePieceHolder3[1].SetActive(false);
+            PuzzlePieceHolder3[2].SetActive(false);
+        }
+    }
+
     public void Puzzle4()
     {
         puzzle4Counter++;
